@@ -1,5 +1,5 @@
 {
-    "name": "prolic/humus-doctrine-hydrator",
+    "name": "shandyDev/humus-doctrine-hydrator",
     "type": "library",
     "description": "Humus Doctrine (recursive) Hydrator",
     "keywords": ["zf2", "doctrine", "humus", "hydrator"],
@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": ">=2.2",
-        "doctrine/common": ">2.2,<2.4-dev"
+        "doctrine/common": ">=2.3"
     },
     "suggest": {
         "doctrine/mongodb-odm": "Doctrine MongoDB Object Document Mapper",
