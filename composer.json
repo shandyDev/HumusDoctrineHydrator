@@ -1,5 +1,5 @@
 {
-    "name": "shandyDev/humus-doctrine-hydrator",
+    "name": "shandy-dev/humus-doctrine-hydrator",
     "type": "library",
     "description": "Humus Doctrine (recursive) Hydrator",
     "keywords": ["zf2", "doctrine", "humus", "hydrator"],
