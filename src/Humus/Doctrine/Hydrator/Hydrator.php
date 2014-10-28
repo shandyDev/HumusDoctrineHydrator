@@ -174,12 +174,12 @@ class Hydrator implements HydratorInterface
                 }
                 $key = $this->fromCamelCase($fieldName);
                 $getter = $this->fieldToGetterMethod($key);
-                if (is_callable(array($object, $getter))) {
-                    $value = $object->$getter();
-                } else if (property_exists(get_class($object), $key)) {
+                if (property_exists(get_class($object), $key)) {
                     $reflectionProperty = new ReflectionProperty(get_class($object), $key);
                     $reflectionProperty->setAccessible(true);
                     $value = $reflectionProperty->getValue($object);
+                } else if (is_callable(array($object, $getter))) {
+                    $value = $object->$getter();
                 } else {
                     continue;
                 }
