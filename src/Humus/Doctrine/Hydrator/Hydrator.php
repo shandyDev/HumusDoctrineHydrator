@@ -121,7 +121,7 @@ class Hydrator implements HydratorInterface
         } else {
             $meta = $this->getObjectManager()->getClassMetadata(get_class($entity));
         }
-        $identifier = array_shift($tmp = $meta->getIdentifier());
+        $identifier = @array_shift($tmp = $meta->getIdentifier());
         foreach ($data as $field => $value) {
             if ($field == $identifier
                 && !$meta->generatorType !== 5 // GENERATOR_TYPE_NONE
@@ -295,7 +295,7 @@ class Hydrator implements HydratorInterface
             if (is_array($value)) {
                 $targetEntity = $this->getEntityFromArray($targetEntityName, $value, $clone);
             } else {
-                $identifier = array_shift($tmp = $this->getObjectManager()->getClassMetadata($targetEntityName)->getIdentifier());
+                $identifier = @array_shift($tmp = $this->getObjectManager()->getClassMetadata($targetEntityName)->getIdentifier());
                 $targetEntity = $this->loadEntity($targetEntityName, array($identifier => $value), $clone);
             }
             $reflectionProperty = $meta->getReflectionProperty($field);
@@ -312,7 +312,7 @@ class Hydrator implements HydratorInterface
             /* @var $collection Collection */
             foreach ($value as $data) {
                 $targetMeta = $this->getObjectManager()->getClassMetadata($targetEntityName);
-                $identifier = array_shift($tmp = $targetMeta->getIdentifier());
+                $identifier = @array_shift($tmp = $targetMeta->getIdentifier());
                 if (is_scalar($data)) {
                     $targetEntity = $this->loadEntity(
                         $targetEntityName,
@@ -343,7 +343,7 @@ class Hydrator implements HydratorInterface
     protected function loadEntity($entityName, array $data, $clone = false)
     {
         $this->validateEntityName($entityName);
-        $identifier = array_shift($tmp = $this->getObjectManager()->getClassMetadata($entityName)->getIdentifier());
+        $identifier = @array_shift($tmp = $this->getObjectManager()->getClassMetadata($entityName)->getIdentifier());
         if (isset($data[$identifier])) {
             $id = $data[$identifier];
             $entity = $this->getObjectManager()->find($entityName, $id);
@@ -410,7 +410,7 @@ class Hydrator implements HydratorInterface
         }
         if (ArrayUtils::isHashTable($data)) {
             if (1 === count($data)) {
-                $result = array_shift($data);
+                $result = @array_shift($data);
             } else {
                 foreach ($data as $key => $value) {
                     if (is_array($value)) {
@@ -423,7 +423,7 @@ class Hydrator implements HydratorInterface
         } else {
             foreach ($data as $value) {
                 if (is_array($value) && 1 === count($value)) {
-                    $result[] = array_shift($value);
+                    $result[] = @array_shift($value);
                 } elseif (is_scalar($value)) {
                     $result[] = $value;
                 }
